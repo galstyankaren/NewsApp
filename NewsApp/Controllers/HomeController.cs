@@ -25,7 +25,7 @@ namespace NewsApp.Controllers
 
             using (var webClient = new System.Net.WebClient())
             {
-                //Specified encoding to fix issues related to German language characters
+                //Specified encoding to avoid issues related to German language characters
                 webClient.Encoding = Encoding.UTF8;
 
                 var json = webClient.DownloadString(ENDPOINT);
