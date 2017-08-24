@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NewsApp.Models.JsonArticle>
+﻿@model IEnumerable<NewsApp.Models.ArticleModels>
 
 @{
     ViewBag.Title = "Index";
@@ -6,6 +6,9 @@
 
 <h2>Index</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table">
     <tr>
         <th>
@@ -38,7 +41,7 @@
             @Html.DisplayFor(modelItem => item.body)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id=item.id })
+            @Html.ActionLink("Details", "Details", new { _id=item.id })
         </td>
     </tr>
 }
