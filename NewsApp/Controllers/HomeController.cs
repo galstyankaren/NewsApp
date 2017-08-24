@@ -42,7 +42,7 @@ namespace NewsApp.Controllers
             foreach (JsonArticle article in root.articles)
             {
 
-                ArticleModels temp = Helpers.JsonToArticleModel(article);
+                ArticleModels temp = Helpers.JsonToArticleModel(article,false);
                 articleList.Add(temp);
             }
 
@@ -82,8 +82,10 @@ namespace NewsApp.Controllers
         /// </summary>
         /// <param name="_id"></param>
         /// <returns></returns>
-        public ActionResult Details(int _id)
+        public ActionResult Details(int? _id)
         {
+            if(_id==null) return RedirectToAction("Index", "Home"); //To avoid accidental calls from Details view.
+
             JsonArticle JsonArticle = new JsonArticle();
             using (var webClient = new System.Net.WebClient())
             {
@@ -96,7 +98,7 @@ namespace NewsApp.Controllers
                 JsonArticle = JsonConvert.DeserializeObject<List<JsonArticle>>(json).Where(x=>x.id==_id).FirstOrDefault();
             }
 
-            ArticleModels temp = Helpers.JsonToArticleModel(JsonArticle);
+            ArticleModels temp = Helpers.JsonToArticleModel(JsonArticle,true);
 
             return View(temp);
         }

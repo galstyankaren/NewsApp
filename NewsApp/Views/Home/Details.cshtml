@@ -4,46 +4,46 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>ArticleModels</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.published_date)
-        </dt>
-
-        <dd>
+<div class="container">
+    <h1>@Html.DisplayFor(model => model.title)</h1>
+    <br />
+    <div>
+        <div class="panel-left">
             @Html.DisplayFor(model => model.published_date)
-        </dd>
+        </div>
+        <div class="panel-right">
+            <i class="fa fa-circle @Model.level" aria-hidden="true"></i>
+        </div>
+    </div>
+    <br />
+    <br />
+    <p>@Html.DisplayFor(model => model.body)</p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.level)
-        </dt>
+    <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.level)
-        </dd>
+    <div class="url_explainations">
+        <h4>Explainations</h4>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.title)
-        </dt>
+        @foreach (var explaination in Model.url_explanation)
+        {
+            <p>@explaination.title : <a href="@explaination.url">@explaination.url</a></p>
 
-        <dd>
-            @Html.DisplayFor(model => model.title)
-        </dd>
+        }
+    </div>
+    <div class="url_actions">
+        <h4>Actions</h4>
+        @foreach (var action in Model.url_action)
+        {
+            <p>@action.title : <a href="@action.url">@action.url</a></p>
+        }
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.body)
-        </dt>
+    <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.body)
-        </dd>
 
-    </dl>
+    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-primary" })
+
+
+
+
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>

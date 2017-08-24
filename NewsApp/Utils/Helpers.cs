@@ -20,11 +20,12 @@ namespace NewsApp.Utils
         static string LevelToCategory(int level) {
             switch (level)
             {
+
                 case 1:
-                    return "medium";
-                case 0:
                     return "low";
                 case 2:
+                    return "medium";
+                case 3:
                     return "high";
                 default:
                     return "low";
@@ -37,13 +38,13 @@ namespace NewsApp.Utils
         /// </summary>
         /// <param name="article"></param>
         /// <returns></returns>
-        public static ArticleModels JsonToArticleModel(JsonArticle article)
+        public static ArticleModels JsonToArticleModel(JsonArticle article, bool isDetail)
         {
             string[] articlesList = article.body.Split('.');
 
             ArticleModels temp = new ArticleModels()
             {
-                body = String.Format(articlesList[0] + "." + articlesList[1]+"."),
+                body = (isDetail)? article.body : String.Format(articlesList[0] + "." + articlesList[1]+"."), //Checks if the model is going to view or not for body text stripping.
                 categories = article.categories,
                 id = article.id,
                 level = LevelToCategory(article.level),
