@@ -5,15 +5,12 @@ using System.Web;
 
 namespace NewsApp.Models
 {
-
-    public class Rootobject
+    /// <summary>
+    /// A Temperory class derived from JsonArticle for Master/Detail Views
+    /// </summary>
+    public class ArticleModels
     {
-        public List<JsonArticle> articles { get; set; }
-    }
-
-    public class JsonArticle
-    {
-        public long published_date { get; set; }
+        public DateTime published_date { get; set; }
         public int level { get; set; }
         public string title { get; set; }
         public string body { get; set; }
@@ -22,17 +19,4 @@ namespace NewsApp.Models
         public Url_Explanation[] url_explanation { get; set; }
         public int id { get; set; }
     }
-
-    public class Url_Action
-    {
-        public string url { get; set; }
-        public string title { get; set; }
-    }
-
-    public class Url_Explanation
-    {
-        public string url { get; set; }
-        public string title { get; set; }
-    }
-
 }

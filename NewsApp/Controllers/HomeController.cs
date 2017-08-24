@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using NewsApp.Models;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace NewsApp.Controllers
 {
@@ -24,6 +25,9 @@ namespace NewsApp.Controllers
 
             using (var webClient = new System.Net.WebClient())
             {
+                //Specified encoding to fix issues related to German language characters
+                webClient.Encoding = Encoding.UTF8;
+
                 var json = webClient.DownloadString(ENDPOINT);
 
                 //Not directly deserialized to Rootobject as the JSON is in the [{}] form.
