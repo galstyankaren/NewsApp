@@ -1,38 +1,50 @@
 ﻿@model IEnumerable<NewsApp.Models.ArticleModels>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Master View";
 }
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.published_date)
+            @Html.ActionLink("Published Date", "Index", new { sortOrder = "date" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.level)
+            @Html.ActionLink("Level", "Index", new { sortOrder = "level" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.title)
+            @Html.ActionLink("Title", "Index", new { sortOrder = "title" })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.body)
         </th>
         <th></th>
     </tr>
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.TextBox("filterByDate", "Filter by Date", new { @class = "form-control" })
 
+        <input type="submit" value="Search" />
+    </p>
+}
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.TextBox("filterByLevel", "Filter By Level", new { @class = "form-control" })
+
+        <input type="submit" value="Search" />
+    </p>
+}
 @foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.published_date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.level)
+            <div><i class="fa fa-circle" aria-hidden="true">@item.level</i></div>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.title)

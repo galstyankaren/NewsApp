@@ -20,7 +20,7 @@ namespace NewsApp.Controllers
         /// Home Page (Master view) of the app. Returns a list of articles from the NEWS API.
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder,string filterByDate, int? filterByLevel)
         {
 
             Rootobject root = new Rootobject();
@@ -38,21 +38,40 @@ namespace NewsApp.Controllers
 
             List<ArticleModels> articleList = new List<ArticleModels>();
 
+
             foreach (JsonArticle article in root.articles)
             {
 
-                ArticleModels temp = new ArticleModels()
-                {
-                    body = article.body,
-                    categories = article.categories,
-                    id = article.id,
-                    level = article.level,
-                    url_action = article.url_action,
-                    published_date = Helpers.UnixToDateTime(article.published_date), //Converts Unix TimeStamp to DateTime
-                    title = article.title,
-                    url_explanation = article.url_explanation
-                };
+                ArticleModels temp = Helpers.JsonToArticleModel(article);
                 articleList.Add(temp);
+            }
+
+            switch (sortOrder)
+            {
+                case "level":
+                    articleList = articleList.OrderByDescending(s => s.level).ToList();
+                    break;
+                case "title":
+                    articleList = articleList.OrderBy(s => s.title).ToList(); //Assending Order for titles.
+                    break;
+                case "date":
+                    articleList = articleList.OrderByDescending(s => s.published_date).ToList();
+                    break;
+                default:
+                    articleList = articleList.OrderByDescending(s => s.id).ToList();
+                    break;
+            }
+
+            if (!String.IsNullOrEmpty(filterByDate))
+            {
+                //var datetime = (Convert.ToDateTime(filterByDate));
+                DateTime date;
+                if(DateTime.TryParse(filterByDate, out date)) //Avoid invalid DateTimeInput
+                    articleList = articleList.Where(x => x.published_date==date).ToList(); //TODO: "Contains" for DateTime Comparision
+            }
+            if (filterByLevel!=null)
+            {
+                articleList = articleList.Where(x => x.level == filterByLevel).ToList();
             }
 
             return View(articleList);
@@ -77,17 +96,7 @@ namespace NewsApp.Controllers
                 JsonArticle = JsonConvert.DeserializeObject<List<JsonArticle>>(json).Where(x=>x.id==_id).FirstOrDefault();
             }
 
-            ArticleModels temp = new ArticleModels()
-            {
-                body = JsonArticle.body,
-                categories = JsonArticle.categories,
-                id = JsonArticle.id,
-                level = JsonArticle.level,
-                url_action = JsonArticle.url_action,
-                published_date = Helpers.UnixToDateTime(JsonArticle.published_date),
-                title = JsonArticle.title,
-                url_explanation = JsonArticle.url_explanation
-            };
+            ArticleModels temp = Helpers.JsonToArticleModel(JsonArticle);
 
             return View(temp);
         }
