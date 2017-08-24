@@ -26,9 +26,11 @@ namespace NewsApp.Utils
         /// <returns></returns>
         public static ArticleModels JsonToArticleModel(JsonArticle article)
         {
+            string[] articlesList = article.body.Split('.');
+
             ArticleModels temp = new ArticleModels()
             {
-                body = article.body,
+                body = String.Format(articlesList[0] + "." + articlesList[1]+"."),
                 categories = article.categories,
                 id = article.id,
                 level = article.level,

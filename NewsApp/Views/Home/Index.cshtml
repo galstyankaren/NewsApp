@@ -1,61 +1,57 @@
-﻿@model IEnumerable<NewsApp.Models.ArticleModels>
+﻿
+@model IEnumerable<NewsApp.Models.ArticleModels>
 
 @{
     ViewBag.Title = "Master View";
 }
+<div class="container">
+    <br />
+    <div class="panel-left">
+        @using (Html.BeginForm())
+        {
+            <p>
+                @Html.TextBox("filterByDate", "Filter by Date", new { @class = "form-control" })
 
-<h2>Index</h2>
+                <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Filter</button>
+            </p>
+        }
+    </div>
+    <div class="panel-right">
+        @using (Html.BeginForm())
+        {
+            <p>
+                @Html.TextBox("filterByLevel", "Filter By Level", new { @class = "form-control" })
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Published Date", "Index", new { sortOrder = "date" })
-        </th>
-        <th>
-            @Html.ActionLink("Level", "Index", new { sortOrder = "level" })
-        </th>
-        <th>
-            @Html.ActionLink("Title", "Index", new { sortOrder = "title" })
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.body)
-        </th>
-        <th></th>
-    </tr>
-@using (Html.BeginForm())
-{
-    <p>
-        @Html.TextBox("filterByDate", "Filter by Date", new { @class = "form-control" })
+                <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Filter</button>
+            </p>
+        }
+    </div>
 
-        <input type="submit" value="Search" />
-    </p>
-}
-@using (Html.BeginForm())
-{
-    <p>
-        @Html.TextBox("filterByLevel", "Filter By Level", new { @class = "form-control" })
+    <br />
 
-        <input type="submit" value="Search" />
-    </p>
-}
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.published_date)
-        </td>
-        <td>
-            <div><i class="fa fa-circle" aria-hidden="true">@item.level</i></div>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.body)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { _id=item.id })
-        </td>
-    </tr>
-}
 
-</table>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Published Date", "Index", new { sortOrder = "date" })
+            </th>
+            <th>
+                @Html.ActionLink("Level", "Index", new { sortOrder = "level" })
+            </th>
+            <th>
+                @Html.ActionLink("Title", "Index", new { sortOrder = "title" })
+            </th>
+        </tr>
+    </table>
+
+
+    <ul class="list-group">
+
+        @foreach (var item in Model)
+            {
+            @Html.Partial("_Article", item)
+        }
+
+    </ul>
+</div>
+

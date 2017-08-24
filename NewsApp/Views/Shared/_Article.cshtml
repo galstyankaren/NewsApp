@@ -1,0 +1,21 @@
+﻿@model NewsApp.Models.ArticleModels
+
+
+<li>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="panel-left">
+                <p>
+                @Html.ActionLink(Model.title, "Details", new { _id = Model.id })
+                <p>
+                <p>@Html.DisplayFor(model => model.body)</p>
+                </p>
+                <p>@Html.DisplayFor(model => model.published_date)</p>
+                </p>
+            </div>
+            <div class="panel-right">
+                <i class="fa fa-circle @Model.level" aria-hidden="true">@Model.level</i>
+            </div>
+        </div>
+    </div>
+</li>

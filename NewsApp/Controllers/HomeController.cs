@@ -64,10 +64,10 @@ namespace NewsApp.Controllers
 
             if (!String.IsNullOrEmpty(filterByDate))
             {
-                //var datetime = (Convert.ToDateTime(filterByDate));
                 DateTime date;
                 if(DateTime.TryParse(filterByDate, out date)) //Avoid invalid DateTimeInput
-                    articleList = articleList.Where(x => x.published_date==date).ToList(); //TODO: "Contains" for DateTime Comparision
+                //  articleList = articleList.Where(x => x.published_date==date).ToList(); //TODO: "Contains" for DateTime Comparision
+                    articleList = articleList.Where(x => x.published_date.ToString().Contains(filterByDate)).ToList(); //TODO: Unuglify
             }
             if (filterByLevel!=null)
             {

@@ -22,3 +22,38 @@ select,
 textarea {
     max-width: 280px;
 }
+.panel-left{
+    float: left;
+    margin: 0 10px;
+}
+.panel-right{
+    float: right;
+    margin: 0 10px;
+}
+.list-group li {
+    list-style: none;
+}
+.btn-search {
+	  background: #424242;
+	  border-radius: 0;
+	  color: #fff;
+	  border-width: 1px;
+	  border-style: solid;
+	  border-color: #1c1c1c;
+	}
+	.btn-search:link, .btn-search:visited {
+	  color: #fff;
+	}
+	.btn-search:active, .btn-search:hover {
+	  background: #1c1c1c;
+	  color: #fff;
+	}
+.1 {
+    color:yellow;
+}
+.2 {
+    color:red;
+}
+.0 {
+    color:green;
+}
