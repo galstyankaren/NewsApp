@@ -6,27 +6,29 @@
 }
 <div class="container">
     <br />
-    <div class="panel-left">
-        @using (Html.BeginForm())
-        {
-            <p>
-                @Html.TextBox("filterByDate", "Filter by Date", new { @class = "form-control" })
+    <div>
+        <br />
+        <div class="form-group input-group ">
+            @using (Html.BeginForm())
+            {
+                <p>
+                    @Html.TextBox("filterByDate", "", new { @class = "form-control" })
 
-                <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Filter</button>
-            </p>
-        }
+                    <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Filter by Date</button>
+                </p>
+            }
+        </div>
+        <div class="form-group input-group">
+            @using (Html.BeginForm())
+            {
+                <p>
+                    @Html.TextBox("filterByLevel", "", new { @class = "form-control" })
+
+                    <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Filter By Level</button>
+                </p>
+            }
+        </div>
     </div>
-    <div class="panel-right">
-        @using (Html.BeginForm())
-        {
-            <p>
-                @Html.TextBox("filterByLevel", "Filter By Level", new { @class = "form-control" })
-
-                <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Filter</button>
-            </p>
-        }
-    </div>
-
     <br />
 
 
