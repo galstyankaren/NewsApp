@@ -48,12 +48,12 @@ textarea {
 	  background: #1c1c1c;
 	  color: #fff;
 	}
-.1 {
+.medium {
     color:yellow;
 }
-.2 {
+.high {
     color:red;
 }
-.0 {
+.low {
     color:green;
 }

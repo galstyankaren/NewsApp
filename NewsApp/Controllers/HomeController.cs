@@ -20,7 +20,7 @@ namespace NewsApp.Controllers
         /// Home Page (Master view) of the app. Returns a list of articles from the NEWS API.
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index(string sortOrder,string filterByDate, int? filterByLevel)
+        public ActionResult Index(string sortOrder,string filterByDate, string filterByLevel)
         {
 
             Rootobject root = new Rootobject();
@@ -69,9 +69,9 @@ namespace NewsApp.Controllers
                 //  articleList = articleList.Where(x => x.published_date==date).ToList(); //TODO: "Contains" for DateTime Comparision
                     articleList = articleList.Where(x => x.published_date.ToString().Contains(filterByDate)).ToList(); //TODO: Unuglify
             }
-            if (filterByLevel!=null)
+            if (!String.IsNullOrEmpty(filterByLevel))
             {
-                articleList = articleList.Where(x => x.level == filterByLevel).ToList();
+                articleList = articleList.Where(x => x.level.Equals(filterByLevel)).ToList();
             }
 
             return View(articleList);

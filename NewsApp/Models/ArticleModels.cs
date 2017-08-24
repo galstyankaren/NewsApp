@@ -11,7 +11,7 @@ namespace NewsApp.Models
     public class ArticleModels
     {
         public DateTime published_date { get; set; }
-        public int level { get; set; }
+        public string level { get; set; }
         public string title { get; set; }
         public string body { get; set; }
         public string[] categories { get; set; }
@@ -19,4 +19,5 @@ namespace NewsApp.Models
         public Url_Explanation[] url_explanation { get; set; }
         public int id { get; set; }
     }
+
 }

@@ -17,7 +17,20 @@ namespace NewsApp.Utils
         {
             return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddSeconds(time);
         }
+        static string LevelToCategory(int level) {
+            switch (level)
+            {
+                case 1:
+                    return "medium";
+                case 0:
+                    return "low";
+                case 2:
+                    return "high";
+                default:
+                    return "low";
+            }
 
+        }
 
         /// <summary>
         /// Converts Json model to Article model.
@@ -33,7 +46,7 @@ namespace NewsApp.Utils
                 body = String.Format(articlesList[0] + "." + articlesList[1]+"."),
                 categories = article.categories,
                 id = article.id,
-                level = article.level,
+                level = LevelToCategory(article.level),
                 url_action = article.url_action,
                 published_date = Helpers.UnixToDateTime(article.published_date), //Converts Unix TimeStamp to DateTime
                 title = article.title,
