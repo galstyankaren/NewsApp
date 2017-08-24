@@ -44,7 +44,7 @@ namespace NewsApp.Utils
 
             ArticleModels temp = new ArticleModels()
             {
-                body = (isDetail)? article.body : String.Format(articlesList[0] + "." + articlesList[1]+"."), //Checks if the model is going to view or not for body text stripping.
+                body = (isDetail)? article.body : String.Format(articlesList[0] + "." + articlesList[1]+"..."), //Checks if the model is going to view or not for body text stripping.
                 categories = article.categories,
                 id = article.id,
                 level = LevelToCategory(article.level),
